@@ -1,0 +1,56 @@
+<script>self["MonacoEnvironment"] = (function (paths) {
+          return {
+            globalAPI: false,
+            getWorkerUrl : function (moduleId, label) {
+              var result =  paths[label];
+              if (/^((http:)|(https:)|(file:)|(\/\/))/.test(result)) {
+                var currentUrl = String(window.location);
+                var currentOrigin = currentUrl.substr(0, currentUrl.length - window.location.hash.length - window.location.search.length - window.location.pathname.length);
+                if (result.substring(0, currentOrigin.length) !== currentOrigin) {
+                  var js = '/*' + label + '*/importScripts("' + result + '");';
+                  var blob = new Blob([js], { type: 'application/javascript' });
+                  return URL.createObjectURL(blob);
+                }
+              }
+              return result;
+            }
+          };
+        })({
+  "editorWorkerService": "/monaco/monacoeditorwork/editor.worker.bundle.js",
+  "css": "/monaco/monacoeditorwork/css.worker.bundle.js",
+  "html": "/monaco/monacoeditorwork/html.worker.bundle.js",
+  "json": "/monaco/monacoeditorwork/json.worker.bundle.js",
+  "typescript": "/monaco/monacoeditorwork/ts.worker.bundle.js",
+  "javascript": "/monaco/monacoeditorwork/ts.worker.bundle.js",
+  "less": "/monaco/monacoeditorwork/css.worker.bundle.js",
+  "scss": "/monaco/monacoeditorwork/css.worker.bundle.js",
+  "handlebars": "/monaco/monacoeditorwork/html.worker.bundle.js",
+  "razor": "/monaco/monacoeditorwork/html.worker.bundle.js"
+});</script>
+<script type="module" crossorigin src="/monaco/assets/index-DRW_6LAn.js"></script>
+<link rel="stylesheet" crossorigin href="/monaco/assets/index-BLe4c716.css">
+<style>
+    body {
+        width: 100vw;
+        height: 100vh;
+        background-color: rgb(60, 61, 62);
+        color:aliceblue;
+        font-family: monospace;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }   
+
+    *{
+        box-sizing: content-box;
+    }
+
+    #editor {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+
+
+<div id="editor"></div>
